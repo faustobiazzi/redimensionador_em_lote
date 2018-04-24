@@ -36,7 +36,6 @@ with open("error.txt", "w") as a:
                     continue
 print ("Foram encontrados "+ str(countfile) + " Arquivos" ) 
 print ("Foram encontrados "+ str(countfolder) + " Pastas" )
-os.system("pause")
-input ("pressione qualquer tecla para terminar")
+input ("pressione ENTER para terminar")
 exit()
 
