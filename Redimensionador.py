@@ -15,24 +15,29 @@ with open("error.txt", "w") as a:
        for filename in files:
              if(".jpg" in filename) or (".JPG" in filename) or (".jpeg" in filename) or (".JPEG" in filename):
                 countfile = countfile +1
-            
+                
                 f = os.path.join(path, filename)
                 print("trabalhando imagem "+f)
-                imagem = Image.open(f)
-                largura_imagem = imagem.size[0]
-                if (largura_imagem > largura_desejada):
-                    try:
-                        altura_imagem = imagem.size[1]
-                        percentual_largura = float(largura_desejada) / float(largura_imagem)
-                        altura_desejada = int((altura_imagem * percentual_largura))
-                        imagem = imagem.resize((largura_desejada, altura_desejada), Image.ANTIALIAS)
-                        imagem.save(f)
-                        #print ("imagem " + filename + " redimensionada)
-                    except Exception as ERROR:
-                        a.write(str(f) + os.linesep)
-                        a.write(str(ERROR) + os.linesep)
+                try: 
+                    imagem = Image.open(f)
+                    largura_imagem = imagem.size[0]
+                    if (largura_imagem > largura_desejada):
+                        try:
+                            altura_imagem = imagem.size[1]
+                            percentual_largura = float(largura_desejada) / float(largura_imagem)
+                            altura_desejada = int((altura_imagem * percentual_largura))
+                            imagem = imagem.resize((largura_desejada, altura_desejada), Image.ANTIALIAS)
+                            imagem.save(f)
+                            #print ("imagem " + filename + " redimensionada)
+                        except Exception as ERROR:
+                            a.write(str(f) + os.linesep)
+                            a.write(str(ERROR) + os.linesep)
+                            continue
+                    else:
                         continue
-                else:
+                except Exception as ERROR:
+                    a.write(str(f) + os.linesep)
+                    a.write(str(ERROR) + os.linesep)
                     continue
 print ("Foram encontrados "+ str(countfile) + " Arquivos" ) 
 print ("Foram encontrados "+ str(countfolder) + " Pastas" )
